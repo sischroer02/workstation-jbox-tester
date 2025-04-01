@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <DUT Name="IO_Struct" Id="{6ae795b5-3f76-4cab-adc9-f3892130c40c}">
+    <Declaration><![CDATA[TYPE IO_Struct :
+STRUCT
+	SECTION : INT;
+	INDEX : INT;
+	CARD : STRING(10);
+	TERMINAL : USINT;
+	SCH_LBL : STRING(10);
+	Signal : STRING(25);
+	TESTER_PORT : STRING(10);
+	TARGET_PORT : STRING(10);
+	DESCRIPTION : STRING(255);
+	LIVE_BOOL : BOOL;
+	LIVE_INT : INT;
+	EXPECTED_BOOL : BOOL;
+	EXPECTED_INT : INT;
+	RESULT : STRING(10);
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

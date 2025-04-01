@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <GVL Name="CONSTANTS" Id="{46936124-0b4c-4191-8ea5-f9773d0032d0}" ParameterList="True">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL CONSTANT
+
+	
+	HMI_HOME_NUM_INSTRUCTIONS : INT := 8;
+	
+	HMI_SECTION_1_NUM_INSTRUCTIONS : INT := 7;
+	
+	HMI_SECTION_2_NUM_INSTRUCTIONS : INT := 8;
+	
+	TOTAL_NUM_TESTS : INT := 70;
+	
+	SECTION1_NUM_DIG_TESTS : INT := 24;
+	
+	SECTION1_NUM_HMI_TESTS : INT := 4;
+	
+	SECTION2_NUM_DIG_TESTS : INT := 19;
+	
+	SECTION2_NUM_HMI_TESTS : INT := 3;
+	
+	NUM_CONNECTIONS : INT := 28;
+	
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

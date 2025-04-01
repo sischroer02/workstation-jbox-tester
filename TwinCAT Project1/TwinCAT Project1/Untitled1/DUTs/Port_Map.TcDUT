@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <DUT Name="Port_Map" Id="{ea999e49-017a-4c9f-9c84-f9ad6b83ea86}">
+    <Declaration><![CDATA[TYPE Port_Map :
+STRUCT
+	JBOX_PORT : STRING(5);
+	TESTER_PORT : STRING(5);
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

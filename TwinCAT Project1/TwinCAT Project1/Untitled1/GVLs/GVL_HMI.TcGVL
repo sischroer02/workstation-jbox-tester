@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <GVL Name="GVL_HMI" Id="{4b0efed5-fea7-4ab1-971f-445349cfc307}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	
+	JBOX_TEST_PORT_MAP : ARRAY[0..CONSTANTS.NUM_CONNECTIONS-1] OF Port_Map := [
+		(
+			JBOX_PORT := 'J37',
+			TESTER_PORT := 'SF1'
+		),
+		(
+			JBOX_PORT := 'S2',
+			TESTER_PORT := 'SF2'
+		),
+		(
+			JBOX_PORT := 'S33',
+			TESTER_PORT := 'J1'
+		),
+		(
+			JBOX_PORT := 'S34',
+			TESTER_PORT := 'J2'
+		),
+		(
+			JBOX_PORT := 'S25',
+			TESTER_PORT := 'J3'
+		),
+		(
+			JBOX_PORT := 'S26',
+			TESTER_PORT := 'J4'
+		),
+		(
+			JBOX_PORT := 'S27',
+			TESTER_PORT := 'J5'
+		),
+		(
+			JBOX_PORT := 'S28',
+			TESTER_PORT := 'J6'
+		),
+		(
+			JBOX_PORT := 'S29',
+			TESTER_PORT := 'J7'
+		),
+		(
+			JBOX_PORT := 'S30',
+			TESTER_PORT := 'J8'
+		),
+		(
+			JBOX_PORT := 'S1',
+			TESTER_PORT := 'J9'
+		),
+		(*
+		(
+			JBOX_PORT := 'S35',
+			TESTER_PORT := 'J10'
+		),
+		*)
+		(
+			JBOX_PORT := 'S3',
+			TESTER_PORT := 'J11'
+		),
+		(
+			JBOX_PORT := 'S5',
+			TESTER_PORT := 'J12'
+		),
+		(
+			JBOX_PORT := 'S8',
+			TESTER_PORT := 'J13'
+		),
+		(
+			JBOX_PORT := 'S10',
+			TESTER_PORT := 'J14'
+		),
+		(
+			JBOX_PORT := 'S21',
+			TESTER_PORT := 'J15'
+		),
+		(
+			JBOX_PORT := 'S22',
+			TESTER_PORT := 'J16'
+		),
+		(
+			JBOX_PORT := 'S23',
+			TESTER_PORT := 'J17'
+		),
+		(
+			JBOX_PORT := 'S24',
+			TESTER_PORT := 'J18'
+		),
+		(
+			JBOX_PORT := 'S4',
+			TESTER_PORT := 'J19'
+		),
+		(
+			JBOX_PORT := 'S6',
+			TESTER_PORT := 'J20'
+		),
+		(
+			JBOX_PORT := 'S9',
+			TESTER_PORT := 'J21'
+		),
+		(
+			JBOX_PORT := 'S11',
+			TESTER_PORT := 'J22'
+		),
+		(
+			JBOX_PORT := 'S13',
+			TESTER_PORT := 'J23'
+		),
+		(
+			JBOX_PORT := 'S14',
+			TESTER_PORT := 'J24'
+		),
+		(
+			JBOX_PORT := 'S15',
+			TESTER_PORT := 'J25'
+		),
+		(
+			JBOX_PORT := 'S16',
+			TESTER_PORT := 'J26'
+		),
+		(
+			JBOX_PORT := 'J36',
+			TESTER_PORT := 'S17'
+		)
+		(*
+		(
+			JBOX_PORT := 'J38',
+			TESTER_PORT := 'S18'
+		)
+		*)
+		];
+
+	//
+	//
+	//
+	
+	(*
+	HMI_HOME_INSTRUCTIONS : ARRAY[0..1] OF HMI_INSTRUCTIONS := [
+	];
+	*)
+	
+	HMI_HOME_INSTRUCTIONS : ARRAY[0..CONSTANTS.HMI_HOME_NUM_INSTRUCTIONS-1] OF HMI_INSTRUCTIONS := [
+		(Instructions := 'Place JBOX Next to Acceptance Tester',
+		 Status := FALSE),
+		(Instructions := 'Visually inspect the box for foreign objects, floating wires, or any signs of being incomplete',
+		 Status := FALSE),
+		(Instructions := 'Unplug power from the acceptance tester',
+		 Status := FALSE),
+		(Instructions := 'Verify green bonding wire is present to bond the door to the enclosure',
+		 Status := FALSE),
+		(Instructions := 'Connect All Tester Cables to JBOX Ports as Shown in the Port Map, Leave 120V Disconnected',
+		 Status := FALSE),
+		(Instructions := 'Open All Breakers in Acceptance Tester Panel',
+		 Status := FALSE),
+		(Instructions := 'Supply 480V Weld Plug on Acceptance Tester with 480V Power',
+		 Status := FALSE),
+		(Instructions := 'Close All Breakers in Acceptance Tester Panel',
+		 Status := FALSE)
+		 
+	];
+	
+	HMI_HOME_BEGIN_TEST_BUTTON : HMI_BUTTON := (
+		Text := 'Initiate JBOX Test',
+		Live_Value := FALSE
+	);
+	
+	HMI_SECTION_1_INSTRUCTIONS : ARRAY[0..CONSTANTS.HMI_SECTION_1_NUM_INSTRUCTIONS-1] OF HMI_INSTRUCTIONS := [
+		(Instructions := 'Verify 480V Indicator for JBOX on Acceptance Tester',
+		 Status := FALSE),
+		(Instructions := 'Perform PSU1 Configuration',
+		 Status := FALSE),
+		(Instructions := 'Perform DCDC1 Configuration',
+		 Status := FALSE),
+		(Instructions := 'Perform DCDC2 Configuration',
+		 Status := FALSE),
+		(Instructions := 'Open JBOX Door',
+		 Status := FALSE),
+		(Instructions := 'Press Estop',
+		 Status := FALSE),
+		(Instructions := 'Pull Fire Alarm',
+		 Status := FALSE)
+	];
+	
+	HMI_PSU_CONFIG_INSTRUCTIONS : ARRAY[0..13] OF SL_INSTRUCTIONS := [
+		(Line := 'Open the Phoenix Contact "Quint Power" App'),
+		(Line := 'Install temportary 22 AWG jumper wire from PSU2 Rem signal to 0V TB'),
+		(Line := 'Select READ VIA NFC'),
+		(Line := 'Select SCAN VIA NFC'),
+		(Line := 'Place top edge of phone over the QR code on PSU2 until power supply is read successfully'),
+		(Line := 'Select OUTPUT VOLTAGE menu'),
+		(Line := 'Set OUTPUT VOLTAGE to 26.00V'),
+		(Line := 'Set PARALLEL OPERATION to TRUE'),
+		(Line := 'Exit OUTPUT VOLTAGE menu and select SIGNALING menu'),
+		(Line := 'Set OUT 2 to ANALOG OUTPUT with OUTPUT CURRENT'),
+		(Line := 'Exit SIGNALING menu'),
+		(Line := 'Select NFC button and plade top edge of phone over the QR code on PSU1 until the dara is written succesfully'),
+		(Line := 'Remove temportary 22 AWG jumper wire FROM PSU2 Rem signal TO 0V TB'),
+		(Line := 'Close Quint Power App')
+	];
+	
+	HMI_DCDC_CONFIG_INSTRUCTIONS : ARRAY[0..3] OF SL_INSTRUCTIONS := [
+		(Line := 'Pull ferrules inserted into terminals 2.1 and 2.2 in DC/DC slightly out so you can probe voltage on exposed ferrule'),
+		(Line := 'Turn Uout dial on DC/DC2 until the DC/DCs output is 52V. Probe on exposed ferrules to verify'),
+		(Line := 'Reseat ferrules to correct depth'),
+		(Line := 'Write "52V, todays DATE, your initials" on the label on DC/DC')
+	];
+
+	
+	
+	HMI_SECTION_1_BEGIN_AUTOMATED_BUTTON : HMI_BUTTON := (
+		Text := 'Begin Automated Test',
+		Live_Value := FALSE
+	);
+	
+	HMI_SECTION_2_INSTRUCTIONS : ARRAY[0..CONSTANTS.HMI_SECTION_2_NUM_INSTRUCTIONS-1] OF HMI_INSTRUCTIONS := [
+		(Instructions := 'Reset Estop',
+		 Status := FALSE),
+		(Instructions := 'Reset Fire Alarm, use the key tied to the top of the acceptance tester to open the box and reset it',
+		 Status := FALSE),
+		(Instructions := 'Unplug J36 and S1 Connections on JBOX',
+		 Status := FALSE),
+		(Instructions := 'Plug J10 and S18 From Acceptance Tester into JBOX S35 and J38 Respectively',
+		 Status := FALSE),
+		(Instructions := 'Perform PSU2 Configuration',
+		 Status := FALSE),
+		(Instructions := 'Verify 120V Indicator for JBOX on Acceptance Tester',
+		 Status := FALSE),
+		(Instructions := 'Verify 120V Indicator FOR GRACE Port Verification Lit Up',
+		 Status := FALSE),
+		 (Instructions := 'Close JBOX Door',
+		 Status := FALSE)
+	];
+	
+	HMI_SECTION_2_BEGIN_AUTOMATED_BUTTON : HMI_BUTTON := (
+		Text := 'Begin Automated Test',
+		Live_Value := FALSE
+	);
+	
+	
+	HMI_ABORT_TEST_BUTTON : HMI_BUTTON := (
+		Text := 'ABORT JBOX TEST',
+		Live_Value := FALSE
+	);
+	
+	HMI_RESET_TEST_BUTTON : HMI_BUTTON := (
+		Text := 'Reset Jbox Test',
+		Live_Value := FALSE
+	);
+	
+
+	ACTIVE_HMI_VIEW_STRING : STRING(50);
+	
+	ACTIVE_HMI_VIEW : INT := 0;
+
+	
+	
+
+
+
+	
+	
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

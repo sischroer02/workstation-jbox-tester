@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <GVL Name="GVL_IO" Id="{22b2f380-5ba0-4c6a-977b-e7f5d221c956}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	
+	SECTION1_DIG_INPUTS : ARRAY[0..CONSTANTS.SECTION1_NUM_DIG_TESTS-1] OF POINTER TO BOOL;
+	
+	SECTION2_DIG_INPUTS : ARRAY[0..CONSTANTS.SECTION2_NUM_DIG_TESTS-1] OF POINTER TO BOOL;
+	
+	{attribute 'TcLinkTo' := 'TIIB[C3 (EL1018)]^Channel 1^Input'}
+	J7_24V_Up AT%I* : BOOL; //14.1 : BOOL; (*INDEX 4 24V PWR Check J7 (4) (1008 (1) port 2) *)
+    {attribute 'TcLinkTo' := 'TIIB[C3 (EL1018)]^Channel 6^Input'}
+	J7_24V_Us AT%I* : BOOL; //4.2 : BOOL; (*INDEX 5 24V PWR Check J7 (5) (1008 (1) port 3) *)    
+	{attribute 'TcLinkTo' := 'TIIB[C3 (EL1018)]^Channel 3^Input'}
+	J8_24V_Up AT%I* : BOOL; //5.4 : BOOL; (*INDEX 14 24V PWR Check J8 (4) (1008 (2) port 5) *)
+    {attribute 'TcLinkTo' := 'TIIB[C3 (EL1018)]^Channel 8^Input'}
+	J8_24V_Us AT%I* : BOOL; //5.5 : BOOL; (*INDEX 15 24V PWR Check J8 (5) (1008 (2) port 6) *)
+
+	
+	
+	{attribute 'TcLinkTo' := 'TIIB[C4 (EL1819)]^Channel 1^Input'}	
+	J1_24V_Up AT%I* : BOOL; //6.2 : BOOL; (*INDEX 20 Lighting 24V Check J1 (1) (1008 (3) port 3) *)
+	{attribute 'TcLinkTo' := 'TIIB[C4 (EL1819)]^Channel 2^Input'}	
+	J1_24V_Us AT%I* : BOOL; //6.3 : BOOL; (*INDEX 21 Lighting 24V Check J1 (2) (1008 (3) port 4) *)
+	{attribute 'TcLinkTo' := 'TIIB[C4 (EL1819)]^Channel 3^Input'}	
+	J2_24V_Up AT%I* : BOOL; //6.4 : BOOL; (*INDEX 22 Lighting 24V Check J2 (1) (1008 (3) port 5) *)
+	{attribute 'TcLinkTo' := 'TIIB[C4 (EL1819)]^Channel 4^Input'}	
+	J2_24V_Us AT%I* : BOOL; //6.5 : BOOL; (*INDEX 23 Lighting 24V Check J2 (2) (1008 (3) port 6) *)
+	{attribute 'TcLinkTo' := 'TIIB[C4 (EL1819)]^Channel 5^Input'}	
+	J3_24V_Up AT%I* : BOOL; //14.3 : BOOL; (*INDEX 6 24V PWR Check J3 (1) (1008 (1) port 4) *)
+	{attribute 'TcLinkTo' := 'TIIB[C4 (EL1819)]^Channel 6^Input'}	
+	J3_24V_Us AT%I* : BOOL; //4.4 : BOOL; (*INDEX 7 24V PWR Check J3 (2) (1008 (1) port 5) *)
+	{attribute 'TcLinkTo' := 'TIIB[C4 (EL1819)]^Channel 7^Input'}	
+	J4_24V_Up AT%I* : BOOL; //4.5 : BOOL; (*INDEX 8 24V PWR Check J4 (1) (1008 (1) port 6) *)
+	{attribute 'TcLinkTo' := 'TIIB[C4 (EL1819)]^Channel 8^Input'}	
+    J4_24V_Us AT%I* : BOOL; //4.7 : BOOL; (*INDEX 9 24V PWR Check J4 (2) (1008 (1) port 7) *)
+	{attribute 'TcLinkTo' := 'TIIB[C4 (EL1819)]^Channel 9^Input'}	
+	J5_24V_Up AT%I* : BOOL; //5.0 : BOOL; (*INDEX 10 24V PWR Check J5 (1) (1008 (2) port 1) *)
+	{attribute 'TcLinkTo' := 'TIIB[C4 (EL1819)]^Channel 10^Input'}	
+	J5_24V_Us AT%I* : BOOL; //5.1 : BOOL; (*INDEX 11 24V PWR Check J5 (2) (1008 (2) port 2) *)
+	{attribute 'TcLinkTo' := 'TIIB[C4 (EL1819)]^Channel 11^Input'}	
+	J6_24V_Up AT%I* : BOOL; //5.2 : BOOL; (*INDEX 12 24V PWR Check J6 (1) (1008 (2) port 3) *)
+	{attribute 'TcLinkTo' := 'TIIB[C4 (EL1819)]^Channel 12^Input'}	
+	J6_24V_Us AT%I* : BOOL; //5.3 : BOOL; (*INDEX 13 24V PWR Check J6 (2) (1008 (2) port 4) *)
+	
+	
+	{attribute 'TcLinkTo' := 'TIIB[C5 (EL1819)]^Channel 16^Input'}	
+	SF1_MF_CONTINUITY AT%I* : BOOL; //5.7 : BOOL; (*INDEX 17 Mine Phone Continuity SF1 (1008 (2) port 8) *)
+	{attribute 'TcLinkTo' := 'TIIB[C5 (EL1819)]^Channel 15^Input'}	
+	SF2_MF_CONTINUITY AT%I* : BOOL; //5.6 : BOOL; (*INDEX 16 Mine Phone Continuity SF2 (1008 (2) port 7) *)	
+	{attribute 'TcLinkTo' := 'TIIB[C5 (EL1819)]^Channel 14^Input'}	
+	SF4_Pull_Station AT%I* : BOOL; //4.0 : BOOL; (*INDEX 3 Fire pull Station SF4 (1008 (1) port 1) *)	
+	{attribute 'TcLinkTo' := 'TIIB[C5 (EL1819)]^Channel 13^Input'}	
+	SF6_MGT_CONTINUITY AT%I* : BOOL; //6.0 : BOOL; (*INDEX 18 MGT Continuity SF6 (1008 (3) port 1) *)
+	{attribute 'TcLinkTo' := 'TIIB[C5 (EL1819)]^Channel 12^Input'}	
+	SF8_MGT_CONTINUITY AT%I* : BOOL; //6.1: BOOL; (*INDEX 19 MGT Continuity SF8 (1008 (3) port 2) *)
+
+	{attribute 'TcLinkTo' := 'TIIB[JBC0 (EK1914)]^Module 2 (DIO)^DIO Inputs^Input 1'}
+	JB_Door_Switch AT%I* : BOOL; (* Door Switch *)
+	
+	{attribute 'TcLinkTo' := 'TIIB[JBC0 (EK1914)]^Module 2 (DIO)^DIO Inputs^Input 0'}
+	JB_DCDCS_OK AT%I* : BOOL; (* JBOX DCDC GOOD Signal *)
+	
+	{attribute 'TcLinkTo' := 'TIIB[JBC0 (EK1914)]^Module 2 (DIO)^DIO Inputs^Input 2'}
+	JB_PSU1_OK AT%I* : BOOL; (* PSU 1 OK *)
+	
+	{attribute 'TcLinkTo' := 'TIIB[JBC0 (EK1914)]^Module 2 (DIO)^DIO Inputs^Input 3'}
+	JB_PSU2_OK AT%I* : BOOL; (* PSU 2 OK *)
+	
+	
+	{attribute 'TcLinkTo' := 'TIIB[C2 (EL2014)]^DIG Outputs^Channel 2^Output'}
+	SF5_Fire_Alarm AT%Q* : BOOL; //3.1 : BOOL; (*INDEX 0 Fire Alarm Sound SF5 (2024 port 2) *)
+	
+
+
+
+	//JB_1914_Us AT%I* : BOOL; //8.0 : BOOL; (*INDEX 1 JBOX 1914 Up Power *) // mapping is likely wrong
+	//JB_1914_Up AT%I* : BOOL; //8.1 : BOOL; (*INDEX 2 JBOX 1914 Us Power *) // mapping is likely wrong
+
+	
+	//PSU1_Stat AT%I* : BOOL; //8.2 : BOOL; (*INDEX 24 PSU1_OK/1.4B *)
+	
+	//PSU2_Stat AT%I* : BOOL; //8.3 : BOOL; (*INDEX 25 PSU2_OK/1.4E *)
+	
+    
+	//PSU1_I AT%I* : BOOL; //10.0 : BOOL; (*INDEX 26 PSU1_IOUT/1.3B *)
+    
+	//PSU2_I AT%I* : BOOL; //10.1 : BOOL; (*INDEX 27 PSU2_IOUT/1.3E *)
+	
+	// MAYBE BADDD JBC0_P2 AT%I45.0 : BOOL; (* DCDC_OK/1.6C *)
+    
+	
+	
+	
+	// INCLINOMETERRRRRR
+	
+	
+	(* FIGURE OUT SAFETY STUFF
+	
+
+    JBC0_P7 AT%I40.0 : BOOL; (* SAFE_IN1_I *)
+    JBC0_P15 AT%I* : BOOL; (* SAFE_IN2_I *)
+    JBC0_P6 AT%I* : BOOL; (* SAFE_IN1_O *)
+    JBC0_P14 AT%I* : BOOL; (* SAFE_IN2_O *)
+    
+   
+	*)
+	
+	
+	
+	(* MAYBE TEST AND DO THIS FOR THE REST OF THE JBOX CARDS
+	
+	JB_2014_DIAG_1 AT%I61 : BOOL; (* PSU2_IOUT/1.3E *)
+	JB_2014_DIAG_2 AT%I61.4 : BOOL; (* PSU2_IOUT/1.3E *)
+	JB_2014_DIAG_3 AT%I62 : BOOL; (* PSU2_IOUT/1.3E *)
+	JB_2014_DIAG_4 AT%I62.4 : BOOL; (* PSU2_IOUT/1.3E *)
+	JB_2014_COM_FAULT AT%I63.0 : BOOL; (* PSU2_IOUT/1.3E *)
+	JB_2014_OVERTEMP AT%I63.1 : BOOL; (* PSU2_IOUT/1.3E *)
+	JB_2014_UNDERVOLT AT%I63.2 : BOOL; (* PSU2_IOUT/1.3E *)
+	JB_2014_MISS_VOLT AT%I63.3 : BOOL; (* PSU2_IOUT/1.3E *)
+	*)
+
+
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

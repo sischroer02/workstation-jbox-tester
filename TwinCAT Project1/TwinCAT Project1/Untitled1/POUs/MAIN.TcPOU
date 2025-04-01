@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <POU Name="MAIN" Id="{99ab54a4-34ac-447e-8e15-602a1f030758}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR_INPUT
+END_VAR
+VAR
+	ExecuteSection1 : FB_EXECUTE_SECTION1;
+	ExecuteSection2 : FB_EXECUTE_SECTION2;
+	
+	temp_ver_value : BOOL;
+
+	i : INT;
+	
+	Delay : TON;
+	Delay1 : TON;
+	
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+IF GVL_HMI.HMI_ABORT_TEST_BUTTON.Live_Value THEN
+	UNINITIALIZE();
+END_IF
+
+CASE GVL_HMI.ACTIVE_HMI_VIEW OF
+  0: GVL_HMI.ACTIVE_HMI_VIEW_STRING := 'Home_Page.content';
+  1: GVL_HMI.ACTIVE_HMI_VIEW_STRING := 'Section_1.content';
+  2: GVL_HMI.ACTIVE_HMI_VIEW_STRING := 'Section_2.content';
+  3: GVL_HMI.ACTIVE_HMI_VIEW_STRING := 'Results_Page.content';
+  11: GVL_HMI.ACTIVE_HMI_VIEW_STRING := 'Section_1.content';
+  12: GVL_HMI.ACTIVE_HMI_VIEW_STRING := 'Section_2.content';
+  ELSE GVL_HMI.ACTIVE_HMI_VIEW_STRING := 'Home_Page.content';  // default
+END_CASE;
+
+CASE GVL_HMI.ACTIVE_HMI_VIEW OF
+	
+	0: // Idle
+	
+		Initialize();
+		
+		temp_ver_value := TRUE;
+		
+		FOR i := 0 TO CONSTANTS.HMI_HOME_NUM_INSTRUCTIONS - 1 DO
+			IF GVL_HMI.HMI_HOME_INSTRUCTIONS[i].Status = FALSE THEN
+				temp_ver_value := FALSE;
+			END_IF
+		END_FOR
+		
+		IF GVL_HMI.HMI_HOME_BEGIN_TEST_BUTTON.Live_Value AND temp_ver_value THEN
+			GVL_HMI.ACTIVE_HMI_VIEW := 1;
+		END_IF
+		
+
+	1: 
+	
+		temp_ver_value := TRUE;
+		
+		FOR i := 0 TO CONSTANTS.HMI_SECTION_1_NUM_INSTRUCTIONS - 1 DO
+			IF GVL_HMI.HMI_SECTION_1_INSTRUCTIONS[i].Status = FALSE THEN
+				temp_ver_value := FALSE;
+			END_IF
+		END_FOR
+		
+		IF GVL_HMI.HMI_SECTION_1_BEGIN_AUTOMATED_BUTTON.Live_Value AND temp_ver_value THEN
+			GVL_HMI.ACTIVE_HMI_VIEW := 11;
+
+		END_IF
+		
+	2:
+	
+		temp_ver_value := TRUE;
+		
+		FOR I:= 0 TO CONSTANTS.HMI_SECTION_2_NUM_INSTRUCTIONS - 1 DO
+			IF GVL_HMI.HMI_SECTION_2_INSTRUCTIONS[i].Status = FALSE THEN
+				temp_ver_value := FALSE;
+			END_IF
+		END_FOR
+		
+		IF GVL_HMI.HMI_SECTION_2_BEGIN_AUTOMATED_BUTTON.Live_Value AND temp_ver_value THEN
+			GVL_HMI.ACTIVE_HMI_VIEW := 12;
+		END_IF
+		
+	3:
+	
+		IF GVL_HMI.HMI_RESET_TEST_BUTTON.Live_Value THEN
+			UNINITIALIZE();
+		END_IF
+		
+		
+	11:
+		WRITE_IO_VALUES();
+		Delay(IN := TRUE, PT := T#1S);
+			
+		IF Delay.Q THEN
+			ExecuteSection1(StartTest := TRUE);
+			
+			IF ExecuteSection1.Done THEN
+				LOG_SECTION1();
+				GVL_HMI.ACTIVE_HMI_VIEW := 2;
+			END_IF
+		END_IF
+		
+	12: 
+		WRITE_IO_VALUES();
+		Delay1(IN := TRUE, PT := T#1S);
+			
+		IF Delay1.Q THEN
+			ExecuteSection2(StartTest := TRUE);
+				
+			IF ExecuteSection2.Done THEN
+				LOG_SECTION2();
+				GVL_HMI.ACTIVE_HMI_VIEW := 3;
+			END_IF
+		END_IF
+
+		
+END_CASE
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

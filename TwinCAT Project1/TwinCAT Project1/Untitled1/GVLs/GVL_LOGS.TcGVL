@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <GVL Name="GVL_LOGS" Id="{bfdfb24e-cb86-46a2-9f3d-67559eecb1d7}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	// All JBOX Connectors are Plugged In, Door Closed, Estop Depressed, Fire Alarm Nominal
+	TEST_RESULTS_ARRAY : ARRAY[0..CONSTANTS.TOTAL_NUM_TESTS-1] OF Test_Log; 
+		
+	NUM_TESTS_LOGGED : INT;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

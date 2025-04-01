@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <DUT Name="HMI_Button" Id="{9ea6e128-0f43-4755-b87d-947306946000}">
+    <Declaration><![CDATA[TYPE HMI_Button :
+STRUCT
+	Text : STRING(50);
+	Live_Value : BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

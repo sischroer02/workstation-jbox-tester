@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <POU Name="LOG_SECTION2" Id="{c622520c-23e0-46a3-ad01-a7ca3917a831}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION LOG_SECTION2 : BOOL
+VAR_INPUT
+END_VAR
+VAR
+	i : INT;
+	j : INT;
+	start_index : INT;
+	end_index : INT;
+	
+	hmi_start_index : INT;
+	hmi_end_index : INT;
+END_VAR
+VAR_OUTPUT
+	Done : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[Done := FALSE;
+
+start_index := GVL_LOGS.NUM_TESTS_LOGGED;
+end_index := start_index + CONSTANTS.SECTION2_NUM_DIG_TESTS-1;
+
+// SECTION 2 DIGITAL INPUTS
+FOR i := start_index TO end_index DO
+	j := i - start_index;
+	GVL_LOGS.TEST_RESULTS_ARRAY[i].DESCRIPTION := GVL_IO_STRUCTS.IO_MAP_SECTION2_DIG[j].DESCRIPTION;
+	GVL_LOGS.TEST_RESULTS_ARRAY[i].INDEX := i;
+	GVL_LOGS.TEST_RESULTS_ARRAY[i].RESULT := GVL_IO_STRUCTS.IO_MAP_SECTION2_DIG[j].RESULT;
+	GVL_LOGS.NUM_TESTS_LOGGED := GVL_LOGS.NUM_TESTS_LOGGED + 1;
+END_FOR
+
+hmi_start_index := GVL_LOGS.NUM_TESTS_LOGGED;
+hmi_end_index := hmi_start_index + CONSTANTS.SECTION2_NUM_HMI_TESTS-1;
+
+FOR i := hmi_start_index TO hmi_end_index DO
+	j := i - hmi_start_index;
+	GVL_LOGS.TEST_RESULTS_ARRAY[i].DESCRIPTION := GVL_IO_STRUCTS.IO_MAP_SECTION2_HMI[j].DESCRIPTION;
+	GVL_LOGS.TEST_RESULTS_ARRAY[i].INDEX := i;
+	GVL_LOGS.TEST_RESULTS_ARRAY[i].RESULT := GVL_IO_STRUCTS.IO_MAP_SECTION2_HMI[j].RESULT;
+	GVL_LOGS.NUM_TESTS_LOGGED := GVL_LOGS.NUM_TESTS_LOGGED + 1;
+END_FOR
+
+Done := TRUE;
+
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
